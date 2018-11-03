@@ -131,22 +131,6 @@ typedef struct system
   FILE                   *fp[16];
   uint16_t                dtaseg;
   uint16_t                dtaoff;
-  
-  /*---------------------------------------------------------------------
-  ; Basically, before we can actually return data, we need to wait for the
-  ; prompt, which is
-  ;
-  ;	CR LF '>'
-  ;
-  ; When we see those three characters printed, then we can turn on input. 
-  ; We keep going until we get a CR, then we turn output off.  This is
-  ; totally a hack to get Racter working.  It is *NOT* a general purpose
-  ; solution, but I don't care about a general purpose solution at this
-  ; time.  This will work.
-  ;---------------------------------------------------------------------*/
-  
-  bool input;
-  char prompt[4];
 } system__s;
 
 /********************************************************************/
@@ -458,41 +442,23 @@ static void ms_dos(system__s *sys)
            putchar(dl);
            sys->vm.regs.eax &= 0xFF;
            sys->vm.regs.eax |= dl;
-           sys->prompt[0]    = sys->prompt[1];
-           sys->prompt[1]    = sys->prompt[2];
-           sys->prompt[2]    = dl;
          }
-         
-         /*--------------------------------------------------------
-         ; Erm ... okay ... you are not expected to understand this.
-         ; I'm not sure I do.
-         ;--------------------------------------------------------*/
-         
          else
          {
-           if (!sys->input)
+           int rc = poll(&(struct pollfd){ .fd = 0 , .events = POLLIN },1,0);
+           if (rc < 1)
            {
-             if (strcmp(sys->prompt,"\r\n>") == 0)
-               sys->input = true;
-             else
-             {
-               sys->vm.regs.eflags |= 0x40;
-               sys->vm.regs.eax    &= 0xFF;
-               return;
-             }
+             sys->vm.regs.eflags |= 0x40;
+             sys->vm.regs.eax    &= 0xFF;
            }
-           
-           c = getchar();
-           
-           if (c == '\n')
+           else
            {
-             sys->input = false;
-             c = '\r';
+             c = getchar();
+             if (c == '\n') c = '\r';
+             sys->vm.regs.eflags &= ~0x40;
+             sys->vm.regs.eax    &= ~0xFF;
+             sys->vm.regs.eax    |= c;
            }
-           
-           sys->vm.regs.eflags &= ~0x40;
-           sys->vm.regs.eax    &= ~255;
-           sys->vm.regs.eax    |= c;
          }
          break;
     
@@ -655,7 +621,7 @@ int main(int argc,char *argv[])
     exit(2);
   }
 
-  setvbuf(stdin,NULL,_IONBF,0);  
+  setvbuf(stdin,NULL, _IONBF,0);
   setvbuf(stdout,NULL,_IONBF,0);
   atexit(cleanup);
   crashreport(SIGSEGV);
