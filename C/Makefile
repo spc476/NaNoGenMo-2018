@@ -27,11 +27,11 @@ LDLIBS  =
 
 .PHONY: all clean
 
-all   : quick msdos
+all   : quick msdos letfreq
 clean :
 	$(RM) $(shell find . -name '*~')
 	$(RM) $(shell find . -name '*.o')
-	$(RM) quick msdos
+	$(RM) quick msdos letfreq
 
 msdos.o : override CFLAGS += -D_GNU_SOURCE
 msdos   : override LDLIBS += -lcgi6
