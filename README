@@ -31,4 +31,7 @@ time, I don't know if this is due to the system I'm running this on, or if
 Lua 5.3 uses significantly more memory, but be warned---Lua 5.1 only for
 this code.
 
+  Included are the original sources I have for the Valleyspeak and Swedish
+Chef translators.
+
 [1]	https://github.com/NaNoGenMo/2018
