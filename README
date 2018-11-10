@@ -25,11 +25,9 @@ attempting to get it working with the original lex based code.
 
   The file 'chef.lua' is the standalone Swedish Chef translator, and
 'valley.lua' is the standalone Valleyspeak translator, and 'run.lua'
-combines the two into something that actually works.  I should note that
-this runs fine under Lua 5.1 but doesn't at all under Lua 5.3.  At this
-time, I don't know if this is due to the system I'm running this on, or if
-Lua 5.3 uses significantly more memory, but be warned---Lua 5.1 only for
-this code.
+combines the two into something that actually works.  Some testing reveals
+that LPeg 1.0 will crash; until it's fixed, use of LPeg 0.12 is encouraged
+for this code.
 
   Included are the original sources I have for the Valleyspeak and Swedish
 Chef translators.
