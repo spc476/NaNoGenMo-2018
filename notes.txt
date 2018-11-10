@@ -1,3 +1,10 @@
+
+http://www.link.cs.cmu.edu/cgi-bin/link/construct-page-4.cgi
+https://github.com/commonsense/conceptnet5/wiki/API
+https://github.com/opencog/link-grammar
+https://developer.wordnik.com/docs/
+
+
 http://www.zachwhalen.net/posts/a-python-script-that-writes-800-page-childrens-books/
 
 
