@@ -1,0 +1,34 @@
+
+                  The Valley Girl of Oz, Bjork Bjork Bjork
+
+                          "Written" by Sean Conner.
+                     Based upon _The Emerald City of Oz_
+                              by L. Frank Baum.
+
+  This is my 2018 entry for NaNoGenMo [1].  After many false attempts to
+come up with a decent idea, I finally settled for this---take one of L.
+Frank Baum's Oz books (the first one to exceed 50,000 words---for the
+record, it's the 6th book in the series) and run it through a translator.
+In this case, the translator doesn't convert the work into Kyrgyz and back
+into English, but into Valleyspeak (you know, like, what Valley Girls, like,
+speak?  Gag me with a spoon!).
+
+  But I wanted to have some challenge to this, so I decided to convert the
+text of the book into Valleyspeak, but the actual dialog in the book into
+Swedish Chef (sorry Sweden!).  Trust me, it was less offensive than my first
+choice, Jive.
+
+  I converted the origial Valleyspeak and Swedish Chef translators to Lua,
+as it would make it easier to combine the two using LPeg (which is one of
+the strengths of LPeg---it's parsing expressions that can be combined) than
+attempting to get it working with the original lex based code.
+
+  The file 'chef.lua' is the standalone Swedish Chef translator, and
+'valley.lua' is the standalone Valleyspeak translator, and 'run.lua'
+combines the two into something that actually works.  I should note that
+this runs fine under Lua 5.1 but doesn't at all under Lua 5.3.  At this
+time, I don't know if this is due to the system I'm running this on, or if
+Lua 5.3 uses significantly more memory, but be warned---Lua 5.1 only for
+this code.
+
+[1]	https://github.com/NaNoGenMo/2018
