@@ -18,6 +18,13 @@
 --
 -- Comments, questinos and criticisms can be sent to: sean@conman.org
 --
+-- NOTE: the resulting pattern MUST be called with an empty table so the
+-- production rules can keep state during processing.  This means you will
+-- call this pattern like:
+--
+--	chef   = require "chef"
+--	output = chef:match(input,1,{})
+--
 -- ************************************************************************
 -- luacheck: ignore 611
 
