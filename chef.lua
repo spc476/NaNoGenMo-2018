@@ -22,8 +22,8 @@
 -- production rules can keep state during processing.  This means you will
 -- call this pattern like:
 --
---	chef   = require "chef"
---	output = chef:match(input,1,{})
+--      chef   = require "chef"
+--      output = chef:match(input,1,{})
 --
 -- ************************************************************************
 -- luacheck: ignore 611
@@ -83,7 +83,7 @@ local chef = Cmt(C"," * Carg(1),bjorkbjorkbjork)
            + Cmt(C"." * Carg(1),bjorkbjorkbjork)
            + Cmt(C"!" * Carg(1),bjorkbjorkbjork)
            + Cmt(NW   * Carg(1),noseen)
-	   + P"an"                    / "un"
+           + P"an"                    / "un"
            + P"An"                    / "Un"
            + P"au"                    / "oo"
            + P"Au"                    / "Oo"
@@ -112,6 +112,6 @@ local chef = Cmt(C"," * Carg(1),bjorkbjorkbjork)
            + P"w"                     / "v"
            + P"W"                     / "V"
            + P(1)
-
+           
 return Carg(1) / function(c) c.seen = false end
      * Cs(chef^1)
